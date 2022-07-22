@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @SpringBootApplication
 public class GraphqlApplication {
@@ -68,6 +70,19 @@ class AuthorController {
             author.setBooks(bookRepository.findAllByAuthor_Id(author.getId()));
         }
         return authors;
+    }
+
+    @MutationMapping(name = "updateAuthor")
+    public Author updateAuthorPartially(@Argument AuthorUpdateDTO dto) {
+        Author author = authorRepository.findById(dto.getId()).orElseThrow(() -> {
+            throw new RuntimeException("Not  found");
+        });
+        if (Objects.nonNull(dto.getFirstName()))
+            author.setFirstName(dto.getFirstName());
+        if (Objects.nonNull(dto.getLastName()))
+            author.setLastName(dto.getLastName());
+        authorRepository.save(author);
+        return author;
     }
 
 }
@@ -170,4 +185,14 @@ class Author {
         return firstName + " " + lastName;
     }
 
+}
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class AuthorUpdateDTO {
+    private Integer id;
+    private String firstName;
+    private String lastName;
 }

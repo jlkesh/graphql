@@ -1,3 +1,7 @@
+#extend input UpdateAuthorDTO
+
+
+
 type Book {
     id: ID!
     title: String
@@ -24,3 +28,14 @@ type Query {
     allAuthors: [Author]
 }
 
+
+type Mutation{
+    updateAuthor(dto:UpdateAuthorDTO):Author
+}
+
+
+input UpdateAuthorDTO{
+    id:ID!
+    firstName: String
+    lastName: String
+}

@@ -16,3 +16,5 @@
 ```
 
 # [Article ](https://www.danvega.dev/blog/2022/05/17/spring-for-graphql/)
+# [schema docs](https://graphql.org/learn/schema/)
+# [schema docs 2](https://www.apollographql.com/docs/apollo-server/schema/schema/)
