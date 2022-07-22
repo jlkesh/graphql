@@ -1,5 +1,3 @@
-#extend input UpdateAuthorDTO
-
 
 
 type Book {
@@ -30,7 +28,7 @@ type Query {
 
 
 type Mutation{
-    updateAuthor(dto:UpdateAuthorDTO):Author
+    updateAuthor(dto: UpdateAuthorDTO):Author
 }
 
 

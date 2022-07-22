@@ -22,7 +22,6 @@ import java.util.Objects;
 
 @SpringBootApplication
 public class GraphqlApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(GraphqlApplication.class, args);
     }
@@ -72,8 +71,8 @@ class AuthorController {
         return authors;
     }
 
-    @MutationMapping(name = "updateAuthor")
-    public Author updateAuthorPartially(@Argument AuthorUpdateDTO dto) {
+    @MutationMapping
+    public Author updateAuthor(@Argument AuthorUpdateDTO dto) {
         Author author = authorRepository.findById(dto.getId()).orElseThrow(() -> {
             throw new RuntimeException("Not  found");
         });
@@ -124,16 +123,18 @@ class Init implements ApplicationContextAware {
 }
 
 enum Rating {
-    FIVE_STARS("⭐️⭐️⭐️⭐️⭐️️️️"),
-    FOUR_STARS("⭐️⭐️⭐️⭐️"),
-    THREE_STARS("⭐️⭐️⭐️"),
-    TWO_STARS("⭐️⭐️"),
-    ONE_STAR("⭐️");
+    FIVE_STARS("⭐️⭐️⭐️⭐️⭐️️️️", "5"),
+    FOUR_STARS("⭐️⭐️⭐️⭐️", "4"),
+    THREE_STARS("⭐️⭐️⭐️", "3"),
+    TWO_STARS("⭐️⭐️", "2"),
+    ONE_STAR("⭐️", "1");
 
     private String star;
+    private String rating;
 
-    Rating(String star) {
+    Rating(String star, String rating) {
         this.star = star;
+        this.rating = rating;
     }
 
     @JsonValue
