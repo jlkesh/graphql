@@ -38,8 +38,8 @@ class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @SchemaMapping(typeName = "Query", value = "allBooks")
-    public List<Book> findAll() {
+    @QueryMapping
+    public List<Book> allBooks() {
         return bookRepository.findAll();
     }
 
@@ -71,6 +71,7 @@ class AuthorController {
         return authors;
     }
 
+    //@SchemaMapping(typeName = "Mutation", value = "updateAuthor")
     @MutationMapping
     public Author updateAuthor(@Argument AuthorUpdateDTO dto) {
         Author author = authorRepository.findById(dto.getId()).orElseThrow(() -> {
