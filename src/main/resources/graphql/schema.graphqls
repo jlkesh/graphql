@@ -1,4 +1,10 @@
-
+enum Size {
+    S,
+    M,
+    L,
+    XL,
+    XXL
+}
 
 type Book {
     id: ID!
@@ -29,6 +35,14 @@ type Query {
 
 type Mutation{
     updateAuthor(dto: UpdateAuthorDTO):Author
+    createProduct(dto: ProductCreateDTO):Author
+}
+
+input ProductCreateDTO{
+    id: ID!
+    name: String!
+    description: String!
+    size:Size
 }
 
 

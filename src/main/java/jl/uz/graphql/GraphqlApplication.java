@@ -160,6 +160,25 @@ class Book {
     private Author author;
 }
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+class Product {
+    @Id
+    private Integer id;
+    private String name;
+    private String description;
+    private Size size;
+}
+
+interface ProductRepo extends JpaRepository<Product, Integer> {
+}
+
+enum Size {
+    S, M, L, XL, XXL
+}
+
 
 @Getter
 @Setter
