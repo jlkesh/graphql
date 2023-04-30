@@ -38,6 +38,7 @@ class BookController {
         this.bookRepository = bookRepository;
     }
 
+    /*@SchemaMapping(typeName = "Query")*/
     @QueryMapping
     public List<Book> allBooks() {
         return bookRepository.findAll();
@@ -45,8 +46,7 @@ class BookController {
 
     @QueryMapping
     public Book findOne(@Argument Integer id) {
-        Book book = bookRepository.findById(id).orElse(null);
-        return book;
+        return bookRepository.findById(id).orElse(null);
     }
 }
 

@@ -1,3 +1,37 @@
+type Query {
+    allBooks: [Book]
+    findOne(id: ID!): Book
+    allAuthors: [Author]
+}
+
+
+type Mutation{
+    updateAuthor(dto: UpdateAuthorDTO):Author
+    createProduct(dto: ProductCreateDTO):Author
+}
+
+
+type Author {
+    id: ID!
+    firstName: String
+    lastName: String
+    books: [Book]
+}
+
+input ProductCreateDTO{
+    id: ID!
+    name: String!
+    description: String!
+    size: Size
+}
+
+
+input UpdateAuthorDTO{
+    id:ID!
+    firstName: String
+    lastName: String
+}
+
 enum Size {
     S,
     M,
@@ -17,37 +51,4 @@ type Book {
 type Rating {
     rating: String
     star: String
-}
-
-type Author {
-    id: ID!
-    firstName: String
-    lastName: String
-    books: [Book]
-}
-
-type Query {
-    allBooks: [Book]
-    findOne(id: ID!): Book
-    allAuthors: [Author]
-}
-
-
-type Mutation{
-    updateAuthor(dto: UpdateAuthorDTO):Author
-    createProduct(dto: ProductCreateDTO):Author
-}
-
-input ProductCreateDTO{
-    id: ID!
-    name: String!
-    description: String!
-    size:Size
-}
-
-
-input UpdateAuthorDTO{
-    id:ID!
-    firstName: String
-    lastName: String
 }
